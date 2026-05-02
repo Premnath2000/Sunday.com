@@ -1,0 +1,465 @@
+/* =========================================
+   monday.com-Style Table View
+   ========================================= */
+
+.table-view {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+/* ---------- Header Row ---------- */
+.table-header-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(17, 24, 39, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 2px solid var(--glass-border);
+}
+
+.table-header {
+  padding: 10px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+  user-select: none;
+  transition: color 0.2s;
+}
+
+.table-header:hover {
+  color: var(--text-secondary);
+}
+
+/* ---------- Cell Sizing ---------- */
+.cell-checkbox { width: 40px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.cell-title { flex: 1; min-width: 200px; }
+.cell-status { width: 130px; flex-shrink: 0; }
+.cell-priority { width: 110px; flex-shrink: 0; }
+.cell-assignee { width: 140px; flex-shrink: 0; }
+.cell-date { width: 130px; flex-shrink: 0; }
+.cell-labels { width: 140px; flex-shrink: 0; }
+.cell-actions { width: 44px; flex-shrink: 0; }
+
+/* ---------- Group Header ---------- */
+.table-group {
+  margin-bottom: 4px;
+}
+
+.group-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 14px;
+  border: none;
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+  border-left: 3px solid var(--group-color, var(--accent-blue));
+}
+
+.group-header:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.group-chevron {
+  font-size: 12px;
+  color: var(--text-muted);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-block;
+}
+
+.group-chevron:not(.collapsed) {
+  transform: rotate(90deg);
+}
+
+.group-color-bar {
+  width: 4px;
+  height: 18px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.group-name {
+  flex: 1;
+  text-align: left;
+}
+
+.group-count {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 2px 10px;
+  background: var(--bg-card);
+  border-radius: 10px;
+}
+
+/* ---------- Group Body (collapsible) ---------- */
+.group-body {
+  overflow: hidden;
+  max-height: 2000px;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+  opacity: 1;
+}
+
+.group-body.collapsed {
+  max-height: 0;
+  opacity: 0;
+}
+
+/* ---------- Task Row ---------- */
+.table-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  transition: background 0.15s, transform 0.15s;
+  position: relative;
+}
+
+.table-row:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.table-cell {
+  padding: 8px 14px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+/* ---------- Checkbox ---------- */
+.row-checkbox {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent-blue);
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* ---------- Title Cell ---------- */
+.title-text {
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--text-primary);
+  padding: 4px 6px;
+  border-radius: 4px;
+  transition: background 0.15s;
+  line-height: 1.4;
+}
+
+.title-text:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.inline-edit-input {
+  width: 100%;
+  padding: 6px 8px;
+  font-size: 13px;
+  font-weight: 500;
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid var(--accent-blue) !important;
+  border-radius: 6px;
+  color: var(--text-primary);
+  outline: none;
+  font-family: 'Inter', sans-serif;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+/* ---------- Status / Priority Chips (monday.com style) ---------- */
+.cell-dropdown-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.cell-chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.2s, transform 0.15s;
+  text-align: center;
+  letter-spacing: 0.2px;
+}
+
+.cell-chip:hover {
+  filter: brightness(1.2);
+  transform: scale(1.02);
+}
+
+/* ---------- Dropdown (shared) ---------- */
+.cell-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 140px;
+  padding: 4px;
+  z-index: 100;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+  animation: dropIn 0.15s ease;
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+}
+
+.cell-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  background: transparent;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.15s;
+  text-align: left;
+}
+
+.cell-dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.cell-dropdown-item.selected {
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.cell-dropdown-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ---------- Assignee Cell ---------- */
+.cell-assignee-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: background 0.15s;
+  color: var(--text-primary);
+}
+
+.cell-assignee-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.mini-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+.assignee-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.assignee-dropdown {
+  min-width: 180px;
+}
+
+/* ---------- Date Input ---------- */
+.date-input {
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  padding: 4px 6px !important;
+  font-size: 12px !important;
+  color: var(--text-secondary) !important;
+  cursor: pointer;
+  border-radius: 6px !important;
+  font-family: 'Inter', sans-serif !important;
+  width: 100%;
+  box-shadow: none !important;
+}
+
+.date-input:hover {
+  border-color: var(--glass-border) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+.date-input:focus {
+  border-color: var(--accent-blue) !important;
+  background: rgba(59, 130, 246, 0.06) !important;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.12) !important;
+}
+
+/* date input icon color */
+.date-input::-webkit-calendar-picker-indicator {
+  filter: invert(0.7);
+  cursor: pointer;
+}
+
+/* ---------- Labels ---------- */
+.table-label {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 4px;
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--accent-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-right: 4px;
+}
+
+/* ---------- Row Actions ---------- */
+.row-delete-btn {
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background 0.15s;
+  opacity: 0.6;
+  line-height: 1;
+}
+
+.row-delete-btn:hover {
+  background: rgba(239, 68, 68, 0.15);
+  opacity: 1;
+}
+
+/* ---------- Add Task Row ---------- */
+.add-task-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 13px;
+  transition: color 0.15s, background 0.15s;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  min-height: 40px;
+}
+
+.add-task-row:not(.adding):hover {
+  color: var(--accent-blue);
+  background: rgba(59, 130, 246, 0.04);
+}
+
+.add-task-row.adding {
+  cursor: default;
+  padding: 6px 14px;
+  gap: 8px;
+}
+
+.add-icon {
+  font-size: 16px;
+  font-weight: 300;
+  width: 40px;
+  text-align: center;
+}
+
+.add-text {
+  font-weight: 500;
+}
+
+.add-input {
+  flex: 1;
+}
+
+.add-confirm {
+  flex-shrink: 0;
+}
+
+/* ---------- Empty Group ---------- */
+.empty-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 56px;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-style: italic;
+}
+
+.empty-icon {
+  font-size: 18px;
+}
+
+/* ---------- Row Animation ---------- */
+@keyframes rowSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-row {
+  animation: rowSlideIn 0.25s ease-out forwards;
+}
+
+@keyframes dropIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .table-view {
+    overflow-x: auto;
+  }
+
+  .table-header-row,
+  .table-row,
+  .add-task-row.adding {
+    min-width: 800px;
+  }
+
+  .cell-labels {
+    display: none;
+  }
+}

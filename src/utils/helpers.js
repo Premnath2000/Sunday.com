@@ -53,6 +53,28 @@ export function sortByPriority(tasks) {
   return [...tasks].sort((a, b) => (order[a.priority] ?? 1) - (order[b.priority] ?? 1));
 }
 
+// Filtering
+export function applyFilters(tasks, filters) {
+  return tasks.filter(t => {
+    if (filters.status && t.status !== filters.status) return false;
+    if (filters.priority && t.priority !== filters.priority) return false;
+    if (filters.assignee && t.assignee !== Number(filters.assignee)) return false;
+    return true;
+  });
+}
+
+// Group tasks by group id
+export function groupTasksByGroup(tasks, groups) {
+  const map = {};
+  groups.forEach(g => { map[g.id] = []; });
+  tasks.forEach(t => {
+    const gid = t.group || 'sprint-1';
+    if (!map[gid]) map[gid] = [];
+    map[gid].push(t);
+  });
+  return map;
+}
+
 // Initials from a name
 export function getInitials(name) {
   return name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);

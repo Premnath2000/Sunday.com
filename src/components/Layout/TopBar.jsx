@@ -7,7 +7,7 @@ export default function TopBar() {
   const { currentPage, sidebarCollapsed, setShowModal, tasks, setCurrentPage, searchQuery, setSearchQuery } = useApp();
   const [showResults, setShowResults] = useState(false);
   const searchRef = useRef(null);
-  const titles = { dashboard: 'Dashboard', board: 'Task Board', chat: 'Team Chat', team: 'Team', analytics: 'Analytics', ai: 'AI Assistant' };
+  const titles = { dashboard: 'Dashboard', board: 'Tasks', chat: 'Team Chat', team: 'Team', analytics: 'Analytics', ai: 'AI Assistant' };
 
   const results = filterTasks(tasks, searchQuery);
 

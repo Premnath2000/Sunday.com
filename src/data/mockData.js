@@ -7,19 +7,25 @@ export const teamMembers = [
   { id: 6, name: 'Emma Wilson', role: 'QA Engineer', avatar: '#06b6d4', status: 'online', email: 'emma@flowsync.io' },
 ];
 
+export const taskGroups = [
+  { id: 'sprint-1', name: 'Sprint 1 — Core Features', color: '#3b82f6' },
+  { id: 'sprint-2', name: 'Sprint 2 — Polish & Testing', color: '#8b5cf6' },
+  { id: 'backlog', name: 'Backlog', color: '#64748b' },
+];
+
 export const initialTasks = [
-  { id: 1, title: 'Design system tokens', description: 'Create color palette, typography scale, and spacing system', status: 'done', priority: 'high', assignee: 4, labels: ['design'], dueDate: '2026-05-01', comments: 3 },
-  { id: 2, title: 'Setup CI/CD pipeline', description: 'Configure GitHub Actions for automated testing and deployment', status: 'done', priority: 'high', assignee: 5, labels: ['devops'], dueDate: '2026-05-01', comments: 5 },
-  { id: 3, title: 'User authentication flow', description: 'Implement login, signup, and password reset with Firebase Auth', status: 'review', priority: 'high', assignee: 3, labels: ['backend', 'auth'], dueDate: '2026-05-03', comments: 8 },
-  { id: 4, title: 'Dashboard analytics cards', description: 'Build real-time analytics cards with animated counters', status: 'review', priority: 'medium', assignee: 2, labels: ['frontend'], dueDate: '2026-05-04', comments: 2 },
-  { id: 5, title: 'Kanban drag & drop', description: 'Implement HTML5 drag and drop for task cards between columns', status: 'progress', priority: 'high', assignee: 2, labels: ['frontend', 'feature'], dueDate: '2026-05-05', comments: 4 },
-  { id: 6, title: 'Real-time notifications', description: 'Push notification system using Firebase Cloud Messaging', status: 'progress', priority: 'medium', assignee: 3, labels: ['backend'], dueDate: '2026-05-06', comments: 1 },
-  { id: 7, title: 'Team chat integration', description: 'Build real-time messaging with channels and direct messages', status: 'progress', priority: 'high', assignee: 2, labels: ['frontend', 'feature'], dueDate: '2026-05-07', comments: 6 },
-  { id: 8, title: 'Mobile responsive layout', description: 'Ensure all pages work on mobile and tablet screens', status: 'todo', priority: 'medium', assignee: 4, labels: ['design', 'frontend'], dueDate: '2026-05-08', comments: 0 },
-  { id: 9, title: 'API rate limiting', description: 'Implement rate limiting middleware for all API endpoints', status: 'todo', priority: 'low', assignee: 3, labels: ['backend', 'security'], dueDate: '2026-05-09', comments: 0 },
-  { id: 10, title: 'E2E test suite', description: 'Write end-to-end tests for critical user flows', status: 'todo', priority: 'medium', assignee: 6, labels: ['testing'], dueDate: '2026-05-10', comments: 0 },
-  { id: 11, title: 'Performance audit', description: 'Run Lighthouse audit and optimize bundle size', status: 'todo', priority: 'low', assignee: 5, labels: ['devops'], dueDate: '2026-05-12', comments: 0 },
-  { id: 12, title: 'Onboarding tutorial', description: 'Create interactive onboarding flow for new users', status: 'todo', priority: 'medium', assignee: 4, labels: ['design', 'feature'], dueDate: '2026-05-14', comments: 0 },
+  { id: 1, title: 'Design system tokens', description: 'Create color palette, typography scale, and spacing system', status: 'done', priority: 'high', assignee: 4, labels: ['design'], dueDate: '2026-05-01', comments: 3, group: 'sprint-1' },
+  { id: 2, title: 'Setup CI/CD pipeline', description: 'Configure GitHub Actions for automated testing and deployment', status: 'done', priority: 'high', assignee: 5, labels: ['devops'], dueDate: '2026-05-01', comments: 5, group: 'sprint-1' },
+  { id: 3, title: 'User authentication flow', description: 'Implement login, signup, and password reset with Firebase Auth', status: 'review', priority: 'high', assignee: 3, labels: ['backend', 'auth'], dueDate: '2026-05-03', comments: 8, group: 'sprint-1' },
+  { id: 4, title: 'Dashboard analytics cards', description: 'Build real-time analytics cards with animated counters', status: 'review', priority: 'medium', assignee: 2, labels: ['frontend'], dueDate: '2026-05-04', comments: 2, group: 'sprint-1' },
+  { id: 5, title: 'Kanban drag & drop', description: 'Implement HTML5 drag and drop for task cards between columns', status: 'progress', priority: 'high', assignee: 2, labels: ['frontend', 'feature'], dueDate: '2026-05-05', comments: 4, group: 'sprint-1' },
+  { id: 6, title: 'Real-time notifications', description: 'Push notification system using Firebase Cloud Messaging', status: 'progress', priority: 'medium', assignee: 3, labels: ['backend'], dueDate: '2026-05-06', comments: 1, group: 'sprint-1' },
+  { id: 7, title: 'Team chat integration', description: 'Build real-time messaging with channels and direct messages', status: 'progress', priority: 'high', assignee: 2, labels: ['frontend', 'feature'], dueDate: '2026-05-07', comments: 6, group: 'sprint-1' },
+  { id: 8, title: 'Mobile responsive layout', description: 'Ensure all pages work on mobile and tablet screens', status: 'todo', priority: 'medium', assignee: 4, labels: ['design', 'frontend'], dueDate: '2026-05-08', comments: 0, group: 'sprint-2' },
+  { id: 9, title: 'API rate limiting', description: 'Implement rate limiting middleware for all API endpoints', status: 'todo', priority: 'low', assignee: 3, labels: ['backend', 'security'], dueDate: '2026-05-09', comments: 0, group: 'sprint-2' },
+  { id: 10, title: 'E2E test suite', description: 'Write end-to-end tests for critical user flows', status: 'todo', priority: 'medium', assignee: 6, labels: ['testing'], dueDate: '2026-05-10', comments: 0, group: 'sprint-2' },
+  { id: 11, title: 'Performance audit', description: 'Run Lighthouse audit and optimize bundle size', status: 'todo', priority: 'low', assignee: 5, labels: ['devops'], dueDate: '2026-05-12', comments: 0, group: 'backlog' },
+  { id: 12, title: 'Onboarding tutorial', description: 'Create interactive onboarding flow for new users', status: 'todo', priority: 'medium', assignee: 4, labels: ['design', 'feature'], dueDate: '2026-05-14', comments: 0, group: 'backlog' },
 ];
 
 export const chatChannels = [

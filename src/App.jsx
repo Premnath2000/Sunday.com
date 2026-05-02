@@ -3,12 +3,12 @@ import { AppProvider, useApp } from './context/AppContext';
 import Sidebar from './components/Layout/Sidebar';
 import TopBar from './components/Layout/TopBar';
 import Dashboard from './components/Dashboard/Dashboard';
-import KanbanBoard from './components/Kanban/KanbanBoard';
+import BoardPage from './components/Board/BoardPage';
 import ChatPanel from './components/Chat/ChatPanel';
 import TeamView from './components/Team/TeamView';
 import Analytics from './components/Analytics/Analytics';
 import AIAssistant from './components/AI/AIAssistant';
-import { teamMembers } from './data/mockData';
+import { teamMembers, taskGroups } from './data/mockData';
 
 function NewTaskModal() {
   const { showModal, setShowModal, addTask } = useApp();
@@ -16,14 +16,15 @@ function NewTaskModal() {
   const [desc, setDesc] = useState('');
   const [priority, setPriority] = useState('medium');
   const [assignee, setAssignee] = useState(1);
+  const [group, setGroup] = useState('sprint-1');
 
   if (showModal !== 'newTask') return null;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!title.trim()) return;
-    addTask({ title, description: desc, status: 'todo', priority, assignee: Number(assignee), labels: ['new'], dueDate: '2026-05-15' });
-    setTitle(''); setDesc(''); setPriority('medium'); setAssignee(1);
+    addTask({ title, description: desc, status: 'todo', priority, assignee: Number(assignee), labels: ['new'], dueDate: '2026-05-15', group });
+    setTitle(''); setDesc(''); setPriority('medium'); setAssignee(1); setGroup('sprint-1');
     setShowModal(null);
   };
 
@@ -54,6 +55,12 @@ function NewTaskModal() {
               {teamMembers.map(m => <option key={m.id} value={m.id}>{m.name}</option>)}
             </select>
           </div>
+          <div className="form-group">
+            <label>Group</label>
+            <select value={group} onChange={e => setGroup(e.target.value)}>
+              {taskGroups.map(g => <option key={g.id} value={g.id}>{g.name}</option>)}
+            </select>
+          </div>
           <div className="modal-actions">
             <button type="button" className="btn btn-ghost" onClick={() => setShowModal(null)}>Cancel</button>
             <button type="submit" className="btn btn-primary">Create Task</button>
@@ -64,12 +71,26 @@ function NewTaskModal() {
   );
 }
 
+function ToastContainer() {
+  const { toasts } = useApp();
+  if (toasts.length === 0) return null;
+  return (
+    <div className="toast-container">
+      {toasts.map(t => (
+        <div key={t.id} className={`toast toast-${t.type}`}>
+          {t.type === 'success' ? '✓' : 'ℹ'} {t.message}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function AppContent() {
   const { currentPage, sidebarCollapsed } = useApp();
 
   const pages = {
     dashboard: <Dashboard />,
-    board: <KanbanBoard />,
+    board: <BoardPage />,
     chat: <ChatPanel />,
     team: <TeamView />,
     analytics: <Analytics />,
@@ -86,6 +107,7 @@ function AppContent() {
         </div>
       </div>
       <NewTaskModal />
+      <ToastContainer />
     </div>
   );
 }

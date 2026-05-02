@@ -3,7 +3,7 @@ import './Sidebar.css';
 
 const navItems = [
   { id: 'dashboard', label: 'Dashboard', icon: '📊' },
-  { id: 'board', label: 'Board', icon: '📋' },
+  { id: 'board', label: 'Tasks', icon: '📋' },
   { id: 'chat', label: 'Chat', icon: '💬' },
   { id: 'team', label: 'Team', icon: '👥' },
   { id: 'analytics', label: 'Analytics', icon: '📈' },

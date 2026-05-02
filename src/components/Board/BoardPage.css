@@ -1,0 +1,115 @@
+/* =========================================
+   Board Page — Toolbar + View Container
+   ========================================= */
+
+.board-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: calc(100vh - var(--topbar-height) - 56px);
+}
+
+/* ---------- Toolbar ---------- */
+.board-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.toolbar-filters {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-select {
+  padding: 7px 12px;
+  font-size: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  outline: none;
+  min-width: 120px;
+}
+
+.filter-select:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.filter-select:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.12);
+}
+
+.clear-filters {
+  font-size: 11px;
+  padding: 6px 10px;
+  color: var(--accent-rose);
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+.clear-filters:hover {
+  background: rgba(239, 68, 68, 0.08);
+  color: var(--accent-rose);
+}
+
+.task-count-badge {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 6px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+}
+
+/* ---------- View Container ---------- */
+.board-view-container {
+  flex: 1;
+  overflow-y: auto;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--glass-border);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .board-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .toolbar-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .toolbar-filters {
+    width: 100%;
+  }
+
+  .filter-select {
+    flex: 1;
+    min-width: 0;
+  }
+}
